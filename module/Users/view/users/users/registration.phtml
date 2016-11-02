@@ -1,0 +1,48 @@
+
+<h1>Registration Users</h1>
+<?php
+
+if ($this->fm->hasMessages()) {
+    $messages = $this->fm->getMessages();
+    foreach($messages as $message) {
+        echo '<h4>'.$message.'</h4>';
+    }
+}
+$form = $this->form;
+
+    echo $this->form()->openTag($form);
+        echo $this->formElementErrors($form->get('email'), array('class' => 'bg-danger'));
+
+        echo '<div class="form-group">';
+        echo $this->formElement($form->get('email'));
+        echo '</div>';
+
+        echo $this->formElementErrors($form->get('firstName'), array('class' => 'bg-danger'));
+
+        echo '<div class="form-group">';
+        echo $this->formElement($form->get('firstName'));
+        echo '</div>';
+
+        echo $this->formElementErrors($form->get('lastName'), array('class' => 'bg-danger'));
+
+        echo '<div class="form-group">';
+        echo $this->formElement($form->get('lastName'));
+        echo '</div>';
+
+        echo $this->formElementErrors($form->get('password'), array('class' => 'bg-danger'));
+
+        echo '<div class="form-group">';
+        echo $this->formElement($form->get('password'));
+        echo '</div>';
+
+        echo $this->formElementErrors($form->get('repeat_password'), array('class' => 'bg-danger'));
+
+        echo '<div class="form-group">';
+        echo $this->formElement($form->get('repeat_password'));
+        echo '</div>';
+
+        echo '<div class="form-group">';
+        echo $this->formSubmit($form->get('submitRegistration'));
+        echo '</div>';
+    echo $this->form()->closeTag();
+?>

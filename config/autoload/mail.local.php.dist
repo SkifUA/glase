@@ -1,0 +1,20 @@
+<?php
+return [
+    'mail' => [
+        'from' => 'kmet.admin@ukr.net'
+    ],
+    'smtp' => [
+        'transport' => [
+            'options' => [
+                'host'              => 'smtp.ukr.net',
+                'connection_class'  => 'login',
+                'connection_config' => [
+                    'username' => 'salad@ukr.net',
+                    'password' => '',
+                    'ssl' => 'ssl'
+                ],
+                'port' => 2525
+            ],
+        ],
+    ],
+];

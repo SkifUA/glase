@@ -1,0 +1,39 @@
+<?php
+$this->headLink()
+    ->appendStylesheet($this->basePath() . '/css/module/goods/goods/goods.css')
+    ->appendStylesheet($this->basePath() . '/css/module/goods/goods/2-col-portfolio.css');
+$this->headScript()
+    ->appendFile($this->basePath() . '/js/textchange/jquery.textchange.js')
+    ->appendFile($this->basePath() . '/js/module/goods/goods/products.js');
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">All Lots
+            <small>Place your bets</small>
+        </h1>
+    </div>
+</div>
+<input id="inputSearchProduct" type="text" class="form-control" placeholder="Text input">
+
+<div id="listProducts">
+    <?=$this->partial(
+    'goods/partial/products-users.phtml',
+    [
+        'paginator' => $this->paginator,
+        'defaultPhoto' => $this->defaultPhoto,
+        'productTimeFormat' => $this->productTimeFormat,
+        'columnSorting' => $this->columnSorting,
+        'orderSorting' => $this->orderSorting,
+        'idActiveSpan' => $this->idActiveSpan,
+        'pathPhoto' => $this->pathPhoto
+    ]
+    );?>
+
+    <?= $this->paginationControl(
+            $this->paginator,
+            'sliding',
+            'goods/partial/paginator.phtml',
+            []
+        )
+    ?>
+</div>

@@ -1,0 +1,80 @@
+<?php
+function makeNameHeadProductsTable($name, $nameHeader, $columnSorting, $orderSorting, $idActiveSpan)
+{
+    $dataOrder = 'DESC';
+    if ($columnSorting === $name ) {
+        $dataOrder = $orderSorting;
+    }
+    echo '<a class="sort-button" href="#" onclick="return false;" data-column="'. $name .'" data-order="' . $dataOrder . '">';
+
+    if ($idActiveSpan !=  $name . 'Desc') {
+        echo '<span id="' . $name . 'Desc" class="order-arrow order-inactive">&#9650;</span>';
+    } else {
+        echo '<span id="' . $name . 'Desc" class="order-arrow order-active">&#9650;</span>';
+    }
+
+    if ($idActiveSpan !=  $name . 'Asc') {
+        echo '<span id="' . $name . 'Asc" class="order-arrow order-inactive">&#9660;</span>';
+    } else {
+        echo '<span id="' . $name . 'Asc" class="order-arrow order-active">&#9660;</span>';
+    }
+    echo $nameHeader;
+
+    echo '</a>';
+};
+?>
+<table class="table">
+    <tr>
+        <th>Order By:</th>
+        <th>
+            <?php makeNameHeadProductsTable('id', 'Number Lot', $this->columnSorting, $this->orderSorting, $this->idActiveSpan )?>
+        </th>
+
+        <th>
+            <?php makeNameHeadProductsTable('name', 'Name', $this->columnSorting, $this->orderSorting, $this->idActiveSpan )?>
+        </th>
+
+        <th>
+            <?php makeNameHeadProductsTable('dateStart', 'Date start', $this->columnSorting, $this->orderSorting, $this->idActiveSpan )?>
+        </th>
+
+        <th>
+            <?php makeNameHeadProductsTable('dateStop', 'Date stop', $this->columnSorting, $this->orderSorting, $this->idActiveSpan )?>
+        </th>
+
+        <th>
+            <?php makeNameHeadProductsTable('price', 'Price now', $this->columnSorting, $this->orderSorting, $this->idActiveSpan )?>
+        </th>
+    </tr>
+</table>
+<?php
+
+echo '<div class="row">';
+$area = 0;
+ foreach ($this->paginator as $lot) {
+     $area++;
+     ?>
+     <div class="col-md-4 portfolio-item  <?= $lot->getDynamic() ? ' alert-success' : 'alert-warning'?>">
+         <a href="<?= $this->url('goods', ['action' => 'product', 'id' => $lot->getId()]) ?>">
+             <img src="
+                    <?php  if (!$lot->getPhoto()) {
+                 echo $this->defaultPhoto;
+             } else {
+                 echo $this->pathPhoto . $lot->getPhoto();
+             }?>
+                    " alt="No Photo">
+         </a>
+         <h3>
+             <a href="<?= $this->url('goods', ['action' => 'product', 'id' => $lot->getId()]) ?>"><?= $this->escapeHtml($lot->getName()) ?>
+                 <small> Lot № <?= $lot->getId()?></small></a>
+         </h3>
+         <h4>Price: $<?= $lot->getPriceDecimal() ?><small> Step $<?= $lot->getStepPriceDecimal()?></small></h4>
+         <p><?= $this->catText($this->escapeHtml($lot->getDescriptions()), 42) ?> &nbsp;</p>
+     </div>
+ <?php
+     if ($area % 3 == 0 && \Goods\Model\GoodsModel::PRODUCT_GOODS_PAGINATOR != $area) {
+         echo '</div><div class="row">';
+     }
+ }
+echo '</div>';
+?>

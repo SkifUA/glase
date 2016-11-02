@@ -1,0 +1,25 @@
+<?=
+$this->partial(
+    'goods/partial/products-users.phtml',
+    [
+        'paginator' => $this->paginator,
+        'defaultPhoto' => $this->defaultPhoto,
+        'productTimeFormat' => $this->productTimeFormat,
+        'columnSorting' => $this->columnSorting,
+        'orderSorting' => $this->orderSorting,
+        'idActiveSpan' => $this->idActiveSpan,
+        'pathPhoto' => $this->pathPhoto
+    ]
+    );
+?>
+<?=
+ $this->paginationControl(
+    $this->paginator,
+    'sliding',
+    'goods/partial/paginator.phtml',
+    [
+        'route' => null,
+        'action'=> null,
+    ]
+)
+?>

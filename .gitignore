@@ -1,0 +1,13 @@
+._*
+.~lock.*
+.vagrant/
+.idea/
+vendor/
+data/cache/*
+!data/cache/.gitkeep
+phpunit.xml
+ubuntu-xenial-16.04-cloudimg-console.log
+phinx.yml
+
+
+tests/_output/*

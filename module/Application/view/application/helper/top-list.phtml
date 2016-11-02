@@ -1,0 +1,25 @@
+<?php
+function checkActive($active, $self)
+{
+    return $self == $active ? 'active' : '' ;
+}
+$active = $this->active;
+if (\Application\Module::ACL_ROLE_ADMIN == $this->role):
+    ?>
+    <li class="<?= checkActive($active, 'home')?>"><a href="<?= $this->url('home') ?>">Home</a></li>
+    <li class="<?= checkActive($active, 'products')?>"><a href="<?= $this->url('goods', ['action' => 'products']) ?>">All Lots</a></li>
+    <li class="<?= checkActive($active, 'goods')?>"><a href="<?= $this->url('admin-goods', ['action' => 'products']) ?>">Admin products</a></li>
+    <li class="<?= checkActive($active, 'users')?>"><a href="<?= $this->url('admin-user', ['action' => 'users']) ?>">Admin users</a></li>
+    <li><a href="<?= $this->url('users', ['action' => 'layout']) ?>">Sign Out</a></li>
+<?php
+    elseif(\Application\Module::ACL_ROLE_USER == $this->role) :?>
+    <li class="<?= checkActive($active, 'home')?>"><a href="<?= $this->url('home') ?>">Home</a></li>
+    <li class="<?= checkActive($active, 'products')?>"><a href="<?= $this->url('goods', ['action' => 'products']) ?>">All Lots</a></li>
+    <li><a href="<?= $this->url('users', ['action' => 'layout']) ?>">Sign Out</a></li>
+<?
+    else :
+?>
+    <li class="<?= checkActive($active, 'registration')?>"><a href="<?= $this->url('users', ['action' => 'registration']) ?>">Registration</a></li>
+    <li class="<?= checkActive($active, 'auth')?>"><a href="<?= $this->url('users', ['action' => 'auth']) ?>">Sig In</a></li>
+<?php endif;
+?>

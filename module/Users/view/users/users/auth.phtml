@@ -1,0 +1,27 @@
+<h1>Authentication</h1>
+<?php
+if ($this->fm->hasMessages()) {
+    $messages = $this->fm->getMessages();
+    foreach($messages as $message) {
+        echo '<h4>'.$message.'</h4>';
+    }
+}
+
+echo $this->form()->openTag($form);
+    echo $this->formElementErrors($form->get('email'), array('class' => 'bg-danger'));
+
+    echo '<div class="form-group">';
+    echo $this->formElement($form->get('email'));
+    echo '</div>';
+
+    echo $this->formElementErrors($form->get('password'), array('class' => 'bg-danger'));
+
+    echo '<div class="form-group">';
+    echo $this->formElement($form->get('password'));
+    echo '</div>';
+
+    echo '<div class="form-group">';
+    echo $this->formSubmit($form->get('submitAuth'));
+    echo '</div>';
+echo $this->form()->closeTag();
+?>

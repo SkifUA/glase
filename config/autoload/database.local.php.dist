@@ -1,0 +1,15 @@
+<?php
+return array(
+    'db' => array(
+        'driver'    => 'MYSQLI',
+        'hostname'  => 'salad_mysql',
+        'database'  => 'dev_salad',
+        'username'  => '',
+        'password'  => '',
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+        ),
+    ),
+);

@@ -1,0 +1,56 @@
+<?php
+$this->headLink()
+    ->appendStylesheet($this->basePath() . '/css/module/goods/goods/product.css');
+$this->headScript()
+    ->appendFile($this->basePath() . '/js/module/goods/goods/product.js');
+
+?>
+<h1>Lot №  <?= $this->product->getId() ?></h1>
+<h2>Name: <?= $this->escapeHtml($this->product->getName()) ?></h2>
+
+<img src=" <?php  if (!$this->product->getPhoto()) {
+    echo $this->defaultPhoto;
+} else {
+    echo $this->pathPhoto;
+}?>
+" alt="No Photo">
+
+<h3>Dynamic: <span id="spanProductDynamic"> <?= $this->product->getDynamic() ? 'active' : 'inactive'?></span></h3>
+
+
+<h2>Desctiption</h2>
+<p><?= $this->escapeHtml($this->product->getDescriptions()) ?></p>
+
+<h2>Start Auction</h2>
+<p><?= $this->product->getDateStart()->format($this->productTimeFormat) ?></p>
+
+<h2>End Auction</h2>
+<p><?= $this->product->getDateStop()->format($this->productTimeFormat) ?></p>
+
+<h2>Start price</h2>
+<p><?= '$ ' . $this->product->getStartPriceDecimal() ?></p>
+
+<h2>Step price</h2>
+<p><?= '$ ' . $this->product->getStepPriceDecimal() ?></p>
+
+<h1>Price</h1>
+<div class="row">
+    <div class="col-xs-2">
+        <input id="productPriceNow" type="text" value=" <?='$ ' .  $this->product->getPriceDecimal() ?>" disabled >
+        <button id="buttonCheckPriceNow" type="button" class="btn btn-warning" data-id="<?= $this->product->getId() ?>">Check now</button>
+    </div class="col-xs-2">
+    <p id="buyerProductInfo">
+    <?php if ($this->product->getBuyer() == $this->authorId ) {
+        echo 'It is Your bet';
+    } ?>
+    </p>
+    </div>
+    <div>
+</div>
+
+<button id="buttonMakeBetLot" type="button"
+        class="btn btn-danger btn-primary btn-lg btn-block"
+        data-id="<?= $this->product->getId() ?>"
+        data-price="<?= $this->product->getPrice() ?>">
+    Make a Bet
+</button>

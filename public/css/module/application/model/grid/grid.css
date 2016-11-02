@@ -1,0 +1,10 @@
+.order-inactive {
+    display: none;
+}
+
+.grid-table-row:hover {
+    background-color: #f7f7f7;
+}
+.grid-table-row {
+    cursor: pointer;
+}
